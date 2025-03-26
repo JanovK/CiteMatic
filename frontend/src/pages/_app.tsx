@@ -1,11 +1,15 @@
 import '../styles/globals.css';
-import type { AppProps } from 'next/app'
-import { ThemeProvider } from 'next-themes'
+import type { AppProps } from 'next/app';
+import { ThemeProvider } from 'next-themes';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light">
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem={true}
+    >
       <Component {...pageProps} />
     </ThemeProvider>
-  )
+  );
 }
