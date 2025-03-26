@@ -1,20 +1,62 @@
-# Node modules
+# ----------------------------------------
+# 🔁 Node & Package Managers
+# ----------------------------------------
 node_modules/
-frontend/node_modules/
+*.log
+*.tsbuildinfo
+.pnpm-debug.log*
+.yarn/
+.pnp.*
+.yarnrc.yml
 
-# Build output
+# ----------------------------------------
+# 📦 Build Output
+# ----------------------------------------
 .next/
 dist/
 out/
+build/
+coverage/
 
-# System files
+# ----------------------------------------
+# 🌐 Frontend Specific
+# ----------------------------------------
+frontend/.next/
+frontend/out/
+frontend/node_modules/
+frontend/next-env.d.ts
+frontend/.vercel/
+
+# ----------------------------------------
+# ⚙️ Backend Specific
+# ----------------------------------------
+backend/.build/
+backend/node_modules/
+
+# ----------------------------------------
+# 🚀 Serverless Framework
+# ----------------------------------------
+backend/.serverless/
+
+# ----------------------------------------
+# 🔐 Environment Files
+# ----------------------------------------
+.env
+.env.*
+!.env.example
+
+# ----------------------------------------
+# 🧪 Testing
+# ----------------------------------------
+coverage/
+
+# ----------------------------------------
+# 🖥️ System / IDE
+# ----------------------------------------
 .vscode/
 .DS_Store
 
-# Logs
-*.log
-
-# Environment
-.env
-.env.local
-node_modules/
+# ----------------------------------------
+# 🚫 Misc
+# ----------------------------------------
+*.pem
