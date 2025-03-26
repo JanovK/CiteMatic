@@ -59,12 +59,21 @@ export default function Home() {
           </div>
 
           {/* Theme Toggle */}
-          <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="text-sm bg-transparent border border-grayBorderLight dark:border-grayBorderDark px-3 py-1 rounded"
-          >
-            {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-          </button>
+          {mounted ? (
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="flex items-center space-x-2 text-sm bg-transparent border border-grayBorderLight dark:border-grayBorderDark px-3 py-1 rounded"
+            >
+              <span>
+                {theme === 'dark' ? '☀️' : '🌙'}
+              </span>
+              <span>
+                {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+              </span>
+            </button>
+          ) : (
+            <div className="w-[130px] h-[36px] bg-gray-200 dark:bg-gray-800 rounded animate-pulse" />
+          )}
         </div>
       </header>
 
