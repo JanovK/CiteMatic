@@ -1,0 +1,23 @@
+service: citeit-backend
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-west-1
+  stage: dev
+  environment:
+    YOUTUBE_API_KEY: ${ssm:/citeit/youtubeApiKey}  # Securely pulled from AWS SSM Parameter Store
+
+functions:
+  generateCitation:
+    handler: src/handler.generateCitation
+    events:
+      - http:
+          path: generate-citation
+          method: post
+          cors: true
+
+plugins:
+  - serverless-plugin-typescript
