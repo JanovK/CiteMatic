@@ -26,6 +26,7 @@ frontend/out/
 frontend/node_modules/
 frontend/next-env.d.ts
 frontend/.vercel/
+frontend/.env.local
 
 # ----------------------------------------
 # ⚙️ Backend Specific
