@@ -3,14 +3,20 @@ import axios from 'axios'
 
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY
 
+const defaultHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': '*',
+}
+
 export const generateCitation: APIGatewayProxyHandler = async (event) => {
   try {
     const body = JSON.parse(event.body || '{}')
     const videoUrl = body.url
 
-    if (!videoUrl || !videoUrl.includes('youtube.com') && !videoUrl.includes('youtu.be')) {
+    if (!videoUrl || (!videoUrl.includes('youtube.com') && !videoUrl.includes('youtu.be'))) {
       return {
         statusCode: 400,
+        headers: defaultHeaders,
         body: JSON.stringify({ error: 'Invalid YouTube URL' }),
       }
     }
@@ -19,6 +25,7 @@ export const generateCitation: APIGatewayProxyHandler = async (event) => {
     if (!videoId) {
       return {
         statusCode: 400,
+        headers: defaultHeaders,
         body: JSON.stringify({ error: 'Unable to extract video ID' }),
       }
     }
@@ -31,6 +38,7 @@ export const generateCitation: APIGatewayProxyHandler = async (event) => {
     if (!video) {
       return {
         statusCode: 404,
+        headers: defaultHeaders,
         body: JSON.stringify({ error: 'Video not found' }),
       }
     }
@@ -42,12 +50,14 @@ export const generateCitation: APIGatewayProxyHandler = async (event) => {
 
     return {
       statusCode: 200,
+      headers: defaultHeaders,
       body: JSON.stringify({ citation: apaCitation }),
     }
   } catch (error) {
     console.error('Error generating citation:', error)
     return {
       statusCode: 500,
+      headers: defaultHeaders,
       body: JSON.stringify({ error: 'Internal server error' }),
     }
   }
