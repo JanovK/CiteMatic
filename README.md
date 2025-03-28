@@ -4,23 +4,53 @@ CiteIt is a free and open-source tool that generates APA-style citations from Yo
 
 > Support for other citation styles and video platforms is planned.
 
+[![Live Site](https://img.shields.io/badge/Live%20Site-citeit.vercel.app-0077cc?style=flat-square&logo=vercel&logoColor=white)](https://citeit.vercel.app)
+
+---
+
 ## ✨ Features
 
-- Paste a YouTube video URL
-- Instantly get a properly formatted APA citation
-- Copy to clipboard
-- Fast, responsive, and serverless
+- 🎥 Paste a YouTube video URL
+- 🧾 Instantly get a properly formatted APA citation
+- 📋 One-click "Copy to Clipboard"
+- 🌓 Light/Dark mode toggle
+- ⚡ Fast, minimalist & fully serverless
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React (Next.js) + TypeScript
-- **Backend:** AWS Lambda (Node.js + TypeScript)
-- **API:** YouTube Data API v3
-- **Hosting:** AWS S3 + CloudFront
+- **Frontend:** [Next.js](https://nextjs.org/) (React + TypeScript)
+- **Backend:** [AWS Lambda](https://aws.amazon.com/lambda/) (Node.js + TypeScript)
+- **API:** [YouTube Data API v3](https://developers.google.com/youtube/v3)
+- **Hosting:** [Vercel](https://vercel.com/)
 
-## 📦 Getting Started
+---
+
+## 📦 Getting Started (Local Dev)
 
 ```bash
+# Frontend
 cd frontend
 npm install
 npm run dev
+
+# Backend
+cd backend
+npm install
+npx serverless deploy
+```
+
+> You'll need a YouTube Data API key stored in AWS SSM Parameter Store at /citeit/youtubeApiKey.
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 🤝 Contributing
+
+PRs welcome! Feel free to open issues or suggest improvements.
+
+---
