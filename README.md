@@ -1,10 +1,10 @@
-# CiteIt 🎓
+# CiteMatic 🎓
 
-CiteIt is a free and open-source tool that generates APA-style citations from YouTube video URLs — ideal for students, researchers, and content creators.
+CiteMatic is a free and open-source tool that generates APA-style citations from YouTube video URLs — ideal for students, researchers, and content creators.
 
 > Support for other citation styles and video platforms is planned.
 
-[![Live Site](https://img.shields.io/badge/Live%20Site-citeit.vercel.app-0077cc?style=flat-square&logo=vercel&logoColor=white)](https://citeit.vercel.app)
+[![Live Site](https://img.shields.io/badge/Live%20Site-citematic.com-0077cc?style=flat-square&logo=vercel&logoColor=white)](https://citematic.com/)
 
 ---
 
@@ -41,7 +41,7 @@ npm install
 npx serverless deploy
 ```
 
-> You'll need a YouTube Data API key stored in AWS SSM Parameter Store at /citeit/youtubeApiKey.
+> You'll need a YouTube Data API key stored in AWS SSM Parameter Store at /citematic/youtubeApiKey.
 
 ## 📄 License
 

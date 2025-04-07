@@ -90,7 +90,7 @@ export default function Home() {
               </svg>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-academicBlue">CiteIt</span>
+              <span className="text-xl font-bold text-academicBlue">CiteMatic</span>
               <span className="text-sm text-graySecondary">Cite your videos. Effortlessly.</span>
             </div>
           </div>
@@ -163,7 +163,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="w-full border-t border-grayBorderLight dark:border-grayBorderDark py-4 text-center text-sm text-graySecondary">
-        © {new Date().getFullYear()} CiteIt. All rights reserved.
+        © {new Date().getFullYear()} CiteMatic. All rights reserved.
       </footer>
     </div>
   );
