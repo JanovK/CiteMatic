@@ -61,6 +61,7 @@ export default function Home() {
       await navigator.clipboard.write([item]);
       setCopied(true);
     } catch (err) {
+      console.error('Failed to copy HTML to clipboard. Falling back to plaintext:', err);
       await navigator.clipboard.writeText(stripMarkdown(citationHTML));
       setCopied(true);
     }
