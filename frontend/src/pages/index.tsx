@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import React from 'react';
 import { useTheme } from 'next-themes';
 import { formatCitationHTML } from '@/utils/formatter';
 import { stripMarkdown } from '@/utils/markdown';
