@@ -39,6 +39,9 @@ npm run dev
 cd backend
 npm install
 npx serverless deploy
+
+# Debug Logging
+DEBUG=true npx serverless invoke local --function generateCitation --path event.json
 ```
 
 > You'll need a YouTube Data API key stored in AWS SSM Parameter Store at /citematic/youtubeApiKey.
