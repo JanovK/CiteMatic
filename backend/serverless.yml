@@ -9,6 +9,7 @@ provider:
   stage: dev
   environment:
     YOUTUBE_API_KEY: ${ssm:/citematic/youtubeApiKey}  # Securely pulled from AWS SSM Parameter Store
+    DEBUG: ${env:DEBUG, 'false'}
 
 functions:
   generateCitation:
