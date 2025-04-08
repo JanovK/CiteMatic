@@ -1,4 +1,4 @@
-import { stripMarkdown } from '../markdown';
+import { stripMarkdown } from '@/utils/markdown';
 
 describe('stripMarkdown', () => {
   it('removes asterisk-based italics from markdown', () => {

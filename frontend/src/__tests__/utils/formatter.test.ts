@@ -1,4 +1,4 @@
-import { formatCitationHTML } from '../formatter';
+import { formatCitationHTML } from '@/utils/formatter';
 
 describe('formatCitationHTML', () => {
   it('formats a full citation into styled HTML', () => {
