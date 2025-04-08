@@ -1,5 +1,6 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import axios from 'axios';
+import { extractVideoId } from './utils/youtube';
 
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 
@@ -69,11 +70,3 @@ export const generateCitation: APIGatewayProxyHandler = async (event) => {
     };
   }
 };
-
-// Helper function to extract YouTube video ID
-function extractVideoId(url: string): string | null {
-  const regex =
-    /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})/;
-  const match = url.match(regex);
-  return match ? match[1] : null;
-}
