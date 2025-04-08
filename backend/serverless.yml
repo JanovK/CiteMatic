@@ -1,6 +1,6 @@
 service: citematic-backend
 
-frameworkVersion: '3'
+frameworkVersion: '4'
 
 provider:
   name: aws
@@ -8,7 +8,7 @@ provider:
   region: eu-west-1
   stage: dev
   environment:
-    YOUTUBE_API_KEY: ${ssm:/citematic/youtubeApiKey}  # Securely pulled from AWS SSM Parameter Store
+    YOUTUBE_API_KEY: ${ssm:/citematic/youtubeApiKey}
     DEBUG: ${env:DEBUG, 'false'}
 
 functions:
@@ -21,4 +21,8 @@ functions:
           cors: true
 
 plugins:
-  - serverless-plugin-typescript
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 3001
