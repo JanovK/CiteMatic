@@ -136,6 +136,7 @@ export default function Home() {
               <p className="text-sm text-graySecondary mb-2">Your APA Citation:</p>
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
               <div
+                data-testid="citation-output"
                 dangerouslySetInnerHTML={{ __html: citationHTML }}
               />
                 <button

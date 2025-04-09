@@ -50,6 +50,7 @@ backend/.serverless/
 # 🧪 Testing
 # ----------------------------------------
 coverage/
+frontend/test-results/
 
 # ----------------------------------------
 # 🖥️ System / IDE

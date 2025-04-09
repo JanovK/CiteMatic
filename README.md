@@ -38,6 +38,9 @@ npm run dev
 # Backend
 cd backend
 npm install
+npm run offline
+
+# Deployment
 npx serverless deploy
 
 # Debug Logging
@@ -45,6 +48,41 @@ DEBUG=true npx serverless invoke local --function generateCitation --path event.
 ```
 
 > You'll need a YouTube Data API key stored in AWS SSM Parameter Store at /citematic/youtubeApiKey.
+
+---
+
+## ✅ Running Tests
+
+### 🧪 Unit Tests (Vitest)
+Run unit tests for frontend and backend:
+
+```bash
+# Frontend (Vitest + Testing Library)
+cd frontend
+npm run test:unit
+
+# Watch mode
+npm run test:unit:watch
+
+# Backend (Vitest)
+cd backend
+npm run test
+```
+
+### 🧪 End-to-End Tests (Playwright)
+Run full E2E tests to simulate user behavior in the browser:
+
+```bash
+cd frontend
+
+# Run in headless mode
+npm run test:e2e
+
+# Optional: Launch Playwright UI for debugging
+npm run test:e2e:ui
+```
+
+---
 
 ## 📄 License
 
