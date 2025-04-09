@@ -1,0 +1,104 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  backend-unit-tests:
+    name: 🧪 Backend Unit Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run test
+
+  frontend-unit-tests:
+    name: 🧪 Frontend Unit Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run test:unit
+
+  frontend-e2e-tests:
+    name: 🧪 Frontend E2E Tests (Playwright)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Start Backend (Serverless Offline) in background
+        run: |
+          cd ../backend
+          npm install
+          npm run offline > ../backend.log 2>&1 &
+          sleep 5
+          echo "✅ Started backend (offline) in background"
+        env:
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          NEXT_PUBLIC_API_URL: http://localhost:3001/dev
+
+      - name: Start Frontend (Next.js) in background
+        run: npm run dev > ../frontend.log 2>&1 &
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:3001/dev
+
+      - name: Wait for localhost:3000 and localhost:3001 to be ready
+        run: |
+          set +e
+          for i in {1..5}; do
+            echo "⏳ Checking services... attempt $i"
+
+            frontend_status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000)
+            backend_status=$(curl -s -o /dev/null -w "%{http_code}" -X POST http://localhost:3001/dev/generate-citation \
+              -H "Content-Type: application/json" \
+              -d '{"url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"}')
+
+            echo "Frontend: $frontend_status | Backend: $backend_status"
+
+            if [ "$frontend_status" -eq 200 ] && [ "$backend_status" -eq 200 ]; then
+              echo "✅ Services are ready"
+              exit 0
+            fi
+
+            sleep 2
+          done
+
+          echo "❌ Services did not become ready in time"
+          echo "------ Frontend logs ------"
+          tail -n 30 ../frontend.log || true
+          echo "------ Backend logs ------"
+          tail -n 30 ../backend.log || true
+          exit 1
+
+      - name: Run Playwright E2E tests
+        run: npm run test:e2e
+
+
