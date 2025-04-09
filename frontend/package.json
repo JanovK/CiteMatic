@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint --max-warnings=0",
     "test": "vitest",
-    "test:watch": "vitest --watch"
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -18,6 +21,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.51.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^20.17.27",
@@ -28,6 +32,7 @@
     "eslint-config-next": "^15.2.3",
     "jsdom": "^26.0.0",
     "next-export-optimize-images": "^4.6.2",
+    "playwright": "^1.51.1",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "tailwindcss": "^3.4.17",
