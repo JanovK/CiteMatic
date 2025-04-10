@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import { useTheme } from 'next-themes';
 import { formatCitationHTML } from '@/utils/formatter';
-import { stripMarkdown } from '@/utils/markdown';
+import { stripHtmlTags } from '@/utils/html';
 
 type CitationParts = {
   author: string;
@@ -56,14 +56,19 @@ export default function Home() {
   };
 
   const handleCopy = async () => {
+    const plainText = stripHtmlTags(citationHTML);
     try {
-      const blob = new Blob([citationHTML], { type: 'text/html' });
-      const item = new ClipboardItem({ 'text/html': blob });
+      const blobHtml = new Blob([citationHTML], { type: 'text/html' });
+      const blobText = new Blob([plainText], { type: 'text/plain' });
+      const item = new ClipboardItem({
+        'text/html': blobHtml,
+        'text/plain': blobText,
+      });
       await navigator.clipboard.write([item]);
       setCopied(true);
     } catch (err) {
       console.error('Failed to copy HTML to clipboard. Falling back to plaintext:', err);
-      await navigator.clipboard.writeText(stripMarkdown(citationHTML));
+      await navigator.clipboard.writeText(plainText);
       setCopied(true);
     }
   };
